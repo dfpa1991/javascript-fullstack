@@ -1,0 +1,40 @@
+{
+  "name": "javascript-fullstack",
+  "version": "1.0.0",
+  "description": "A JS fullstack web application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev-backend": "nodemon backend/server.js"
+  },
+  "keywords": [
+    "Javascript",
+    "Web",
+    "HTML",
+    "CSS",
+    "Express"
+  ],
+  "author": "Dani - Chamz Web Development",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dfpa1991/javascript-fullstack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dfpa1991/javascript-fullstack/issues"
+  },
+  "homepage": "https://github.com/dfpa1991/javascript-fullstack#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^10.0.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "fs-extra": "^11.3.1",
+    "mongoose": "^8.18.0",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
