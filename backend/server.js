@@ -3,9 +3,6 @@
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
-
-console.log(process.env.NODE_ENV);
-
 // Importing the express module
 const express = require("express");
 const morgan = require("morgan");
@@ -35,14 +32,36 @@ app.use(multer({ storage }).single("image")); // Multer for file uploads
 app.use(express.urlencoded({ extended: false }));
 // Express json middleware <- Server understands JSON data
 app.use(express.json());
-
 // Routes - Importing the books route
 app.use('/api/books', require("./routes/books")); // Serve the route /api/books to send JSON data
-
 // Static files
 app.use(express.static(path.join(__dirname, "public")));
+// 404 API error handler
+app.use(/^\/api\/.*/, (req, res) => {
+    res.status(404).json({
+        success: false,
+        error: {
+            code: 404,
+            codeMessage: 'ROUTE_NOT_FOUND',
+            message: 'API endpoint not found',
+            path: req.originalUrl,
+            method: req.method,
+            avalableEndpoints: [
+                'GET /api/books',
+                'DELETE /api/books/:id',
+                'POST /api/books',
+                'POST /api/books/bulk'
+            ]
+        }
+    });  
+});
+// 404 all other routes - Wildcard route Regex
+app.use(/^.*/, (req, res) => {
+    res.status(404).send('<h1>404 Not Found</h1>');
+});
 
 // Starting the server
 app.listen(app.get("port"), () => {
     console.log(`Server is running on port ${app.get('port')}`);
 });
+
