@@ -1,0 +1,54 @@
+{
+    "books": [
+        {
+            "title": "To Kill a Mockingbird",
+            "author": "Harper Lee",
+            "isbn": "978-0446310789"
+        },
+        {
+            "title": "1984",
+            "author": "George Orwell",
+            "isbn": "978-0451524935"
+        },
+        {
+            "title": "Pride and Prejudice",
+            "author": "Jane Austen",
+            "isbn": "978-0141439518"
+        },
+        {
+            "title": "The Great Gatsby",
+            "author": "F. Scott Fitzgerald",
+            "isbn": "978-0743273565"
+        },
+        {
+            "title": "The Catcher in the Rye",
+            "author": "J.D. Salinger",
+            "isbn": "978-0316769488"
+        },
+        {
+            "title": "Lord of the Rings",
+            "author": "J.R.R. Tolkien",
+            "isbn": "978-0544003415"
+        },
+        {
+            "title": "The Hobbit",
+            "author": "J.R.R. Tolkien",
+            "isbn": "978-0547928227"
+        },
+        {
+            "title": "Fahrenheit 451",
+            "author": "Ray Bradbury",
+            "isbn": "978-1451673319"
+        },
+        {
+            "title": "Jane Eyre",
+            "author": "Charlotte Brontë",
+            "isbn": "978-0141441146"
+        },
+        {
+            "title": "The Alchemist",
+            "author": "Paulo Coelho",
+            "isbn": "978-0062315007"
+        }
+    ]
+}

@@ -1,5 +1,10 @@
 // Importing the dotenv module
-require("dotenv").config();
+// Check if the environment is development or production
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
+
+console.log(process.env.NODE_ENV);
 
 // Importing the express module
 const express = require("express");
@@ -28,7 +33,7 @@ const storage = multer.diskStorage({
 app.use(multer({ storage }).single("image")); // Multer for file uploads
 // Express urlencoded middleware
 app.use(express.urlencoded({ extended: false }));
-// Express json middleware
+// Express json middleware <- Server understands JSON data
 app.use(express.json());
 
 // Routes - Importing the books route

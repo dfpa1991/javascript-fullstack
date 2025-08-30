@@ -1,0 +1,8 @@
+{
+    "message": "Books with ISBNs \"978-0446310789\" already exist",
+    "success": false,
+    "data": null,
+    "duplicateISBNs": [
+        "978-0446310789"
+    ]
+}
