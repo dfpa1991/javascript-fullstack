@@ -7,6 +7,11 @@ const router = Router();
 // Importing the Book model and saving it in a variable
 const Book = require("../models/Books");
 
+// Requiring the mongoose module
+const mongoose = require("mongoose");
+// Validate the data using mongoose using a function
+const isValidObjectId = id => mongoose.Types.ObjectId.isValid(id);
+
 /*
  * Books API Routes
  * This file contains all the route handlers for book-related operations
@@ -128,8 +133,9 @@ router.post("/bulk", async(req, res) => {
         }
         // Insert all the books into the database
         const savedBooks = await Book.insertMany(books, { ordered: false }); // The ordered: false option allows the bulk insert to continue even if some documents fail to insert.
-        // Return the response to the client as 201 status code
+        // Log the saved books to the console
         console.log(savedBooks);
+        // Return the response to the client as 201 status code
         res.status(201).json({
             message: "The books have been created successfully",
             sucess: true,
@@ -191,10 +197,23 @@ router.post("/bulk", async(req, res) => {
 router.delete("/:id", async (req, res) => {
     try {
         console.log(`ID received: ${req.params.id}`);
+        // Validate the ID
+        console.log(isValidObjectId(req.params.id));
+        if (!isValidObjectId(req.params.id)) {
+            return res.status(400).json({
+                message: "Invalid book ID: Input must be a 24 character hex string",
+                success: false,
+                data: `ID: ${req.params.id} is not a valid ID`
+            });
+        }
         // Check if the book exists first
         const bookExists = await Book.findById(req.params.id);
         if (!bookExists) {
-            return res.status(404).json({message: "Book not found"});
+            return res.status(404).json({
+                message: "Book not found",
+                success: false,
+                data: `Book ID: ${req.params.id} does not exist`
+            });
         }
         // Delete the book
         const deletedBook = await Book.findByIdAndDelete(req.params.id);
@@ -203,6 +222,12 @@ router.delete("/:id", async (req, res) => {
         res.json({message: "Book has been deleted successfully", deletedBook});
 
     } catch (error) {
+        if (req.params.id.length !== 24) {
+            return res.status(400).json({
+                message: "Invalid book ID: Input must be a 24 character hex string",
+                success: false
+            });
+        }
         console.log(error);
         res.status(500).json({message: "Error deleting book"});
     }
