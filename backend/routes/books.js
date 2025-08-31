@@ -119,7 +119,7 @@ router.post("/bulk", async(req, res) => {
                 message: "Books array is empty",
                 success: false,
                 data: null
-            })
+            });
         }
         // Validate that each book has a title, author, and isbn
         for (const book of books) {

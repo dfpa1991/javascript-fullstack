@@ -2,6 +2,8 @@
 // Check if the environment is development or production
 if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
+} else {
+    require("dotenv").config({ path: ".env.production" }); // Production mode
 }
 // Importing the express module
 const express = require("express");
@@ -32,9 +34,10 @@ app.use(multer({ storage }).single("image")); // Multer for file uploads
 app.use(express.urlencoded({ extended: false }));
 // Express json middleware <- Server understands JSON data
 app.use(express.json());
+// Root route
 // Routes - Importing the books route
 app.use('/api/books', require("./routes/books")); // Serve the route /api/books to send JSON data
-// Static files
+// Static files, public route
 app.use(express.static(path.join(__dirname, "public")));
 // 404 API error handler
 app.use(/^\/api\/.*/, (req, res) => {
